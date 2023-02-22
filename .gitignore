@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ODrive/.vs
+/ODrive/bin/Debug/net7.0
+/ODrive/obj
+/ODriveTests/bin
+/ODriveTests/obj
