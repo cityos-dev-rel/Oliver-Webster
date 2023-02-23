@@ -4,7 +4,6 @@ using ODrive.Models;
 
 namespace ODrive.Controllers
 {
-    [Route("api/files")]
     [ApiController]
     public class UploadedFilesController : ControllerBase
     {
@@ -27,8 +26,8 @@ namespace ODrive.Controllers
             return Ok();
         }
 
-        // GET: api/files/5
-        [HttpGet("{id}")]
+        // GET: /files/5
+        [HttpGet("/files/{id}")]
         public async Task<ActionResult<UploadedFile>> GetUploadedFile(string id)
         {
             // Escape the curly braces in the log message.
@@ -53,8 +52,8 @@ namespace ODrive.Controllers
 
         }
 
-        // GET: api/files
-        [HttpGet]
+        // GET: /files
+        [HttpGet("/files")]
         public async Task<ActionResult<IEnumerable<UploadedFile>>> GetUploadedFiles()
         {
             _logger.LogInformation("GET: /files endpoint called.");
@@ -76,8 +75,8 @@ namespace ODrive.Controllers
                 .ToListAsync();
         }
 
-        // POST: api/files
-        [HttpPost]
+        // POST: /files
+        [HttpPost("/files")]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<UploadedFile>> PostUploadedFile([FromForm] IFormFile data)
         {
@@ -137,9 +136,9 @@ namespace ODrive.Controllers
             return CreatedAtAction("GetUploadedFile", new { id = queuedFile.FileId }, null);
         }
 
-        // PUT: api/files/5
+        // PUT: /files/5
         // This allows for updating the file name.
-        [HttpPut("{id}")]
+        [HttpPut("/files/{id}")]
         public async Task<IActionResult> PutUploadedFile(string id, string newName)
         {
             _logger.LogInformation("PUT: /files/{{id}} endpoint called.");
@@ -171,8 +170,8 @@ namespace ODrive.Controllers
             return CreatedAtAction("GetUploadedFile", new { id = id }, null);
         }
 
-        // DELETE: api/files/5
-        [HttpDelete("{id}")]
+        // DELETE: /files/5
+        [HttpDelete("/files/{id}")]
         public async Task<IActionResult> DeleteUploadedFile(string id)
         {
             _logger.LogInformation("DELETE: /files/{{id}} endpoint called.");

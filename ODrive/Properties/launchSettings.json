@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5210"
+      "applicationUrl": "http://localhost:8080"
     },
     "https": {
       "commandName": "Project",
@@ -31,9 +31,10 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "launchUrl": "http://{ServiceHost}:8080/swagger",
+      "httpPort":  8080,
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": false
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
