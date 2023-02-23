@@ -38,6 +38,29 @@ paths:
                 format: binary
         '404':
           description: File not found
+    put:
+      description: Update a video file
+      parameters:
+        - in: path
+          name: fileid
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: newName
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: File updated
+          headers:
+            Location:
+              schema:
+                type: string
+              description: "Updated file location"
+        '404':
+          description: File not found
     delete:
       description: Delete a video file
       parameters:

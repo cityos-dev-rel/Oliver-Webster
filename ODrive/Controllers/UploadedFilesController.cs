@@ -60,7 +60,7 @@ namespace ODrive.Controllers
             _logger.LogInformation("GET: /files endpoint called.");
             if (_context.UploadedFiles == null)
             {
-                // Not in schema, but this is the appropriate response.
+                // Not in original schema, but this is the appropriate response.
                 _logger.LogWarning("Database is not initialized.");
                 return NotFound();
             }
@@ -84,7 +84,7 @@ namespace ODrive.Controllers
             _logger.LogInformation("POST: /files endpoint called.");
             if (_context.UploadedFiles == null)
             {
-                // Not in the schema but including for consistency with the above.
+                // Not in original schema but including for consistency with the above.
                 _logger.LogWarning("Database is not initialized.");
                 return NotFound("Database is not initialized.");
             }
@@ -135,6 +135,40 @@ namespace ODrive.Controllers
             }
 
             return CreatedAtAction("GetUploadedFile", new { id = queuedFile.FileId }, null);
+        }
+
+        // PUT: api/files/5
+        // This allows for updating the file name.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUploadedFile(string id, string newName)
+        {
+            _logger.LogInformation("PUT: /files/{{id}} endpoint called.");
+
+            if (_context.UploadedFiles == null)
+            {
+                _logger.LogWarning("Database is not initialized.");
+                return NotFound();
+            }
+
+            _context.UploadedFiles.Find(id).Name = newName;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UploadedFileExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetUploadedFile", new { id = id }, null);
         }
 
         // DELETE: api/files/5
