@@ -98,6 +98,8 @@ paths:
               description: "Created file location"
         '400':
           description: Bad request
+        '404':
+          description: No database found
         '409':
           description: File exists
         '415':
@@ -113,6 +115,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UploadedFile'
+        '404':
+            description: No database found
 
 components:
   schemas:
