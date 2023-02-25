@@ -47,8 +47,10 @@ namespace ODrive.Controllers
                 return NotFound();
             }
 
+            string fileType = "video/" + uploadedFile.Name.Substring(uploadedFile.Name.LastIndexOf('.') + 1);
+
             // Return the file, with the appropriate content type and file name.
-            return File(uploadedFile.Data, "application/octet-stream", uploadedFile.Name);
+            return File(uploadedFile.Data, fileType, uploadedFile.Name);
 
         }
 
