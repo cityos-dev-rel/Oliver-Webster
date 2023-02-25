@@ -96,7 +96,8 @@ namespace ODrive.Controllers
             }
 
             // For now, checking the suffix of the file as a proxy for the content type.
-            if (!data.FileName.EndsWith(".mp4") && !data.FileName.EndsWith(".mpeg"))
+            string fileType = data.FileName.Substring(data.FileName.LastIndexOf('.') + 1);
+            if (fileType != "mpg" && fileType != "mpeg" && fileType != "mp4")
             {
                 return new UnsupportedMediaTypeResult();
             }
