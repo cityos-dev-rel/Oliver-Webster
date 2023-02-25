@@ -27,9 +27,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/v1/health",
+							"raw": "{{baseUrl}}/health",
 							"host": [
-								"http://localhost:8080/v1"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"health"
@@ -44,9 +44,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/v1/health",
+									"raw": "{{baseUrl}}/health",
 									"host": [
-										"http://localhost:8080/v1"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"health"
