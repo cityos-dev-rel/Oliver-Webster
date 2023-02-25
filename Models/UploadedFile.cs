@@ -9,5 +9,6 @@
 
         // Nullable to enable returning file in an array without the data.
         public byte[]? Data { get; set; }
+        public string? ContentType { get; set; }
     }
 }

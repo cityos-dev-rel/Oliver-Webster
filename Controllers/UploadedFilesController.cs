@@ -47,10 +47,8 @@ namespace ODrive.Controllers
                 return NotFound();
             }
 
-            string fileType = "video/" + uploadedFile.Name.Substring(uploadedFile.Name.LastIndexOf('.') + 1);
-
             // Return the file, with the appropriate content type and file name.
-            return File(uploadedFile.Data, fileType, uploadedFile.Name);
+            return File(uploadedFile.Data, uploadedFile.ContentType, uploadedFile.Name);
 
         }
 
@@ -65,8 +63,8 @@ namespace ODrive.Controllers
                 _logger.LogWarning("Database is not initialized.");
                 return NotFound();
             }
-            // Remove the data from the response as it would be displayed
-            // as text in the array response.
+            // Remove the data and type from the response as they would be displayed
+            // as text in the array response which is not compliant with the schema.
             return await _context.UploadedFiles.Select(f => new UploadedFile
             {
                 Fileid = f.Fileid,
@@ -97,7 +95,10 @@ namespace ODrive.Controllers
 
             // For now, checking the suffix of the file as a proxy for the content type.
             string fileType = data.FileName.Substring(data.FileName.LastIndexOf('.') + 1);
-            if (fileType != "mpg" && fileType != "mpeg" && fileType != "mp4")
+            
+            // Coalesce .mpg to .mpeg.
+            fileType = fileType == "mpg" ? "mpeg" : fileType;
+            if (fileType != "mpeg" && fileType != "mp4")
             {
                 return new UnsupportedMediaTypeResult();
             }
@@ -105,7 +106,8 @@ namespace ODrive.Controllers
             UploadedFile queuedFile = new UploadedFile{
                 Fileid = Guid.NewGuid().ToString(),
                 Created_at = DateTime.Now,
-                Name = data.FileName
+                Name = data.FileName,
+                ContentType = "video/" + fileType
             };
             
             byte[] dataArray;
