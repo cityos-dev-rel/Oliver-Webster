@@ -16,7 +16,7 @@ namespace ODrive.Models
             modelBuilder.Entity<UploadedFile>(entity =>
             {
                 entity.ToTable("UploadedFiles");
-                entity.HasKey(e => e.FileId);
+                entity.HasKey(e => e.Fileid);
             });
         }
 

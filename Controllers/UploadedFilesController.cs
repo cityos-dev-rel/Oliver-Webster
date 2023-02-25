@@ -69,10 +69,10 @@ namespace ODrive.Controllers
             // as text in the array response.
             return await _context.UploadedFiles.Select(f => new UploadedFile
             {
-                FileId = f.FileId,
+                Fileid = f.Fileid,
                 Name = f.Name,
                 Size = f.Size,
-                Created_At = f.Created_At
+                Created_at = f.Created_at
             })
                 .ToListAsync();
         }
@@ -102,8 +102,8 @@ namespace ODrive.Controllers
             }
 
             UploadedFile queuedFile = new UploadedFile{
-                FileId = Guid.NewGuid().ToString(),
-                Created_At = DateTime.Now,
+                Fileid = Guid.NewGuid().ToString(),
+                Created_at = DateTime.Now,
                 Name = data.FileName
             };
             
@@ -135,7 +135,7 @@ namespace ODrive.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUploadedFile", new { id = queuedFile.FileId }, null);
+            return CreatedAtAction("GetUploadedFile", new { id = queuedFile.Fileid }, null);
         }
 
         // PUT: /files/5

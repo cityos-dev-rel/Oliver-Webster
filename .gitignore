@@ -10,3 +10,6 @@
 /ODriveTests/obj
 /bin/Debug/net7.0
 /obj
+/odrive.db
+/odrive.db-shm
+/odrive.db-wal
